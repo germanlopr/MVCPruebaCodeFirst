@@ -1,0 +1,1074 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LaboratoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Areas">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoArea" Type="nvarchar" MaxLength="4" />
+          <Property Name="NombreAreas" Type="nvarchar" MaxLength="50" />
+          <Property Name="Categoria" Type="int" />
+          <Property Name="SubCategoria" Type="int" />
+        </EntityType>
+        <EntityType Name="Aseguradoras">
+          <Key>
+            <PropertyRef Name="IdAseguradora" />
+          </Key>
+          <Property Name="IdAseguradora" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoAseguradora" Type="varchar" MaxLength="8" />
+          <Property Name="NombreAseguradora" Type="varchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="Examenes">
+          <Key>
+            <PropertyRef Name="IdExamen" />
+          </Key>
+          <Property Name="IdExamen" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdArea" Type="bigint" />
+          <Property Name="CodigoExamen" Type="varchar" MaxLength="15" />
+          <Property Name="NombreExamen" Type="varchar" MaxLength="94" />
+          <Property Name="NivelAtencion" Type="int" />
+          <Property Name="SignificanciaClinica" Type="varchar" MaxLength="30" />
+          <Property Name="PrecioExamen" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoCUPS" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroFactura" Type="nvarchar" MaxLength="30" />
+          <Property Name="Pago" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdOrdenServicio" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Laboratoristas">
+          <Key>
+            <PropertyRef Name="IdLaboratorista" />
+          </Key>
+          <Property Name="IdLaboratorista" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreLaboratorista" Type="varchar" MaxLength="10" />
+          <Property Name="Apellido" Type="varchar" MaxLength="8" />
+          <Property Name="NroRegistro" Type="int" />
+          <Property Name="Clave" Type="varchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="Medicos">
+          <Key>
+            <PropertyRef Name="IdMedico" />
+          </Key>
+          <Property Name="IdMedico" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodMedico" Type="varchar" MaxLength="12" />
+          <Property Name="NombreMedico" Type="varchar" MaxLength="20" />
+          <Property Name="ApellidoMedico" Type="varchar" MaxLength="20" />
+          <Property Name="Especialidad" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="Muestras">
+          <Key>
+            <PropertyRef Name="IdMuestra" />
+          </Key>
+          <Property Name="IdMuestra" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="IdTipoMuestra" Type="bigint" />
+        </EntityType>
+        <EntityType Name="OrdenServicio">
+          <Key>
+            <PropertyRef Name="IdOrdenServicio" />
+          </Key>
+          <Property Name="IdOrdenServicio" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPaciente" Type="bigint" />
+          <Property Name="IdAseguradora" Type="bigint" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="NroRegistro" Type="int" />
+          <Property Name="IngresoPor" Type="varchar" MaxLength="16" />
+          <Property Name="IdMedico" Type="int" />
+          <Property Name="FechaEntrega" Type="datetime" />
+          <Property Name="FechaRecepcion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrdenServicioDetalle">
+          <Key>
+            <PropertyRef Name="IdOrdenServicioDetalle" />
+          </Key>
+          <Property Name="IdOrdenServicioDetalle" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOrdenServicio" Type="bigint" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="EstadoMuestra" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMedico" Type="bigint" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="NroIdentificacionPaciente" Type="int" />
+          <Property Name="Nombres" Type="varchar" MaxLength="12" />
+          <Property Name="PrimerApellido" Type="varchar" MaxLength="7" />
+          <Property Name="SegundoApellido" Type="varchar" MaxLength="7" />
+          <Property Name="Sexo" Type="int" />
+          <Property Name="Hclinica" Type="varchar" MaxLength="9" />
+          <Property Name="FechaNacimiento" Type="varchar" MaxLength="19" />
+          <Property Name="Edad" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="21" />
+          <Property Name="Telefono" Type="int" />
+        </EntityType>
+        <EntityType Name="Pruebas">
+          <Key>
+            <PropertyRef Name="IdPrueba" />
+          </Key>
+          <Property Name="IdPrueba" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="NombrePrueba" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdValorReferencia" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Resultados">
+          <Key>
+            <PropertyRef Name="IdResultado" />
+          </Key>
+          <Property Name="IdResultado" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRegistro" Type="bigint" />
+          <Property Name="IdLaboratorista" Type="bigint" />
+          <Property Name="IdExamen" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ResultadosDetalle">
+          <Key>
+            <PropertyRef Name="IdResultadoDetalle" />
+          </Key>
+          <Property Name="IdResultadoDetalle" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdResultado" Type="bigint" />
+          <Property Name="IdExamen" Type="bigint" />
+          <Property Name="IdPrueba" Type="bigint" />
+          <Property Name="IdValorReferencia" Type="bigint" />
+          <Property Name="ValorResultado" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="TipoMuestras">
+          <Key>
+            <PropertyRef Name="IdTipoMuestra" />
+          </Key>
+          <Property Name="IdTipoMuestra" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreTipoMuestra" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="ValoresReferencia">
+          <Key>
+            <PropertyRef Name="IdValorReferencia" />
+          </Key>
+          <Property Name="IdValorReferencia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LimiteInferiorEdad" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteSuperiorEdad" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteInferiorSexo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteSuperiorSexo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="unidad" Type="varchar" MaxLength="20" />
+          <Property Name="TipoValor1" Type="varchar" MaxLength="20" />
+          <Property Name="TipoValor2" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__OrdenServ__IdAse__33D4B598">
+          <End Role="Aseguradoras" Type="Self.Aseguradoras" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aseguradoras">
+              <PropertyRef Name="IdAseguradora" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdAseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenServ__IdPac__32E0915F">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="IdPaciente" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__IdLab__3B75D760">
+          <End Role="Laboratoristas" Type="Self.Laboratoristas" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratoristas">
+              <PropertyRef Name="IdLaboratorista" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdLaboratorista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__IdReg__3A81B327">
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Examenes_Area">
+          <End Role="Areas" Type="Self.Areas" Multiplicity="0..1" />
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Areas">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Examenes">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_OrdenServicio">
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muestras_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Muestras" Type="Self.Muestras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Muestras">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muestras_TipoMuestras">
+          <End Role="TipoMuestras" Type="Self.TipoMuestras" Multiplicity="0..1" />
+          <End Role="Muestras" Type="Self.Muestras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMuestras">
+              <PropertyRef Name="IdTipoMuestra" />
+            </Principal>
+            <Dependent Role="Muestras">
+              <PropertyRef Name="IdTipoMuestra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenServicio_OrdenServicioDetalle">
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="0..1" />
+          <End Role="OrdenServicioDetalle" Type="Self.OrdenServicioDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="OrdenServicioDetalle">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paciente_Medico">
+          <End Role="Medicos" Type="Self.Medicos" Multiplicity="0..1" />
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicos">
+              <PropertyRef Name="IdMedico" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="IdMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prueba_VlrRef">
+          <End Role="ValoresReferencia" Type="Self.ValoresReferencia" Multiplicity="0..1" />
+          <End Role="Pruebas" Type="Self.Pruebas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValoresReferencia">
+              <PropertyRef Name="IdValorReferencia" />
+            </Principal>
+            <Dependent Role="Pruebas">
+              <PropertyRef Name="IdValorReferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pruebas_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Pruebas" Type="Self.Pruebas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Pruebas">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegPaciente_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resultados_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadosDetalle_Resultado">
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="0..1" />
+          <End Role="ResultadosDetalle" Type="Self.ResultadosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resultados">
+              <PropertyRef Name="IdResultado" />
+            </Principal>
+            <Dependent Role="ResultadosDetalle">
+              <PropertyRef Name="IdResultado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaboratoryModelStoreContainer">
+          <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aseguradoras" EntityType="Self.Aseguradoras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examenes" EntityType="Self.Examenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laboratoristas" EntityType="Self.Laboratoristas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicos" EntityType="Self.Medicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muestras" EntityType="Self.Muestras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenServicio" EntityType="Self.OrdenServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenServicioDetalle" EntityType="Self.OrdenServicioDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pruebas" EntityType="Self.Pruebas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resultados" EntityType="Self.Resultados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadosDetalle" EntityType="Self.ResultadosDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMuestras" EntityType="Self.TipoMuestras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValoresReferencia" EntityType="Self.ValoresReferencia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__OrdenServ__IdAse__33D4B598" Association="Self.FK__OrdenServ__IdAse__33D4B598">
+            <End Role="Aseguradoras" EntitySet="Aseguradoras" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenServ__IdPac__32E0915F" Association="Self.FK__OrdenServ__IdPac__32E0915F">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__IdLab__3B75D760" Association="Self.FK__Resultado__IdLab__3B75D760">
+            <End Role="Laboratoristas" EntitySet="Laboratoristas" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__IdReg__3A81B327" Association="Self.FK__Resultado__IdReg__3A81B327">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Examenes_Area" Association="Self.FK_Examenes_Area">
+            <End Role="Areas" EntitySet="Areas" />
+            <End Role="Examenes" EntitySet="Examenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_OrdenServicio" Association="Self.FK_Facturas_OrdenServicio">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muestras_Examenes" Association="Self.FK_Muestras_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Muestras" EntitySet="Muestras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muestras_TipoMuestras" Association="Self.FK_Muestras_TipoMuestras">
+            <End Role="TipoMuestras" EntitySet="TipoMuestras" />
+            <End Role="Muestras" EntitySet="Muestras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenServicio_OrdenServicioDetalle" Association="Self.FK_OrdenServicio_OrdenServicioDetalle">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="OrdenServicioDetalle" EntitySet="OrdenServicioDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_Medico" Association="Self.FK_Paciente_Medico">
+            <End Role="Medicos" EntitySet="Medicos" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prueba_VlrRef" Association="Self.FK_Prueba_VlrRef">
+            <End Role="ValoresReferencia" EntitySet="ValoresReferencia" />
+            <End Role="Pruebas" EntitySet="Pruebas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pruebas_Examenes" Association="Self.FK_Pruebas_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Pruebas" EntitySet="Pruebas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegPaciente_Examenes" Association="Self.FK_RegPaciente_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resultados_Examenes" Association="Self.FK_Resultados_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultadosDetalle_Resultado" Association="Self.FK_ResultadosDetalle_Resultado">
+            <End Role="Resultados" EntitySet="Resultados" />
+            <End Role="ResultadosDetalle" EntitySet="ResultadosDetalle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LaboratoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Areas">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoArea" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="NombreAreas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Categoria" Type="Int32" />
+          <Property Name="SubCategoria" Type="Int32" />
+          <NavigationProperty Name="Examenes" Relationship="Self.FK_Examenes_Area" FromRole="Areas" ToRole="Examenes" />
+        </EntityType>
+        <EntityType Name="Aseguradoras">
+          <Key>
+            <PropertyRef Name="IdAseguradora" />
+          </Key>
+          <Property Name="IdAseguradora" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoAseguradora" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="NombreAseguradora" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdenServicio" Relationship="Self.FK__OrdenServ__IdAse__33D4B598" FromRole="Aseguradoras" ToRole="OrdenServicio" />
+        </EntityType>
+        <EntityType Name="Examenes">
+          <Key>
+            <PropertyRef Name="IdExamen" />
+          </Key>
+          <Property Name="IdExamen" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdArea" Type="Int64" />
+          <Property Name="CodigoExamen" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NombreExamen" Type="String" MaxLength="94" FixedLength="false" Unicode="false" />
+          <Property Name="NivelAtencion" Type="Int32" />
+          <Property Name="SignificanciaClinica" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioExamen" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoCUPS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Areas" Relationship="Self.FK_Examenes_Area" FromRole="Examenes" ToRole="Areas" />
+          <NavigationProperty Name="Muestras" Relationship="Self.FK_Muestras_Examenes" FromRole="Examenes" ToRole="Muestras" />
+          <NavigationProperty Name="Pruebas" Relationship="Self.FK_Pruebas_Examenes" FromRole="Examenes" ToRole="Pruebas" />
+          <NavigationProperty Name="OrdenServicio" Relationship="Self.FK_RegPaciente_Examenes" FromRole="Examenes" ToRole="OrdenServicio" />
+          <NavigationProperty Name="Resultados" Relationship="Self.FK_Resultados_Examenes" FromRole="Examenes" ToRole="Resultados" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroFactura" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Pago" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdOrdenServicio" Type="Int64" />
+          <NavigationProperty Name="OrdenServicio" Relationship="Self.FK_Facturas_OrdenServicio" FromRole="Facturas" ToRole="OrdenServicio" />
+        </EntityType>
+        <EntityType Name="Laboratoristas">
+          <Key>
+            <PropertyRef Name="IdLaboratorista" />
+          </Key>
+          <Property Name="IdLaboratorista" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreLaboratorista" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="NroRegistro" Type="Int32" />
+          <Property Name="Clave" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resultados" Relationship="Self.FK__Resultado__IdLab__3B75D760" FromRole="Laboratoristas" ToRole="Resultados" />
+        </EntityType>
+        <EntityType Name="Medicos">
+          <Key>
+            <PropertyRef Name="IdMedico" />
+          </Key>
+          <Property Name="IdMedico" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodMedico" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="NombreMedico" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMedico" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Especialidad" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Paciente_Medico" FromRole="Medicos" ToRole="Pacientes" />
+        </EntityType>
+        <EntityType Name="Muestras">
+          <Key>
+            <PropertyRef Name="IdMuestra" />
+          </Key>
+          <Property Name="IdMuestra" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="IdTipoMuestra" Type="Int64" />
+          <NavigationProperty Name="Examenes" Relationship="Self.FK_Muestras_Examenes" FromRole="Muestras" ToRole="Examenes" />
+          <NavigationProperty Name="TipoMuestras" Relationship="Self.FK_Muestras_TipoMuestras" FromRole="Muestras" ToRole="TipoMuestras" />
+        </EntityType>
+        <EntityType Name="OrdenServicio">
+          <Key>
+            <PropertyRef Name="IdOrdenServicio" />
+          </Key>
+          <Property Name="IdOrdenServicio" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPaciente" Type="Int64" />
+          <Property Name="IdAseguradora" Type="Int64" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="NroRegistro" Type="Int32" />
+          <Property Name="IngresoPor" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="IdMedico" Type="Int32" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+          <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aseguradoras" Relationship="Self.FK__OrdenServ__IdAse__33D4B598" FromRole="OrdenServicio" ToRole="Aseguradoras" />
+          <NavigationProperty Name="Examenes" Relationship="Self.FK_RegPaciente_Examenes" FromRole="OrdenServicio" ToRole="Examenes" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_OrdenServicio" FromRole="OrdenServicio" ToRole="Facturas" />
+          <NavigationProperty Name="Pacientes" Relationship="Self.FK__OrdenServ__IdPac__32E0915F" FromRole="OrdenServicio" ToRole="Pacientes" />
+          <NavigationProperty Name="Resultados" Relationship="Self.FK__Resultado__IdReg__3A81B327" FromRole="OrdenServicio" ToRole="Resultados" />
+          <NavigationProperty Name="OrdenServicioDetalle" Relationship="LaboratoryModel.FK_OrdenServicio_OrdenServicioDetalle" FromRole="OrdenServicio" ToRole="OrdenServicioDetalle" />
+        </EntityType>
+        <EntityType Name="OrdenServicioDetalle">
+          <Key>
+            <PropertyRef Name="IdOrdenServicioDetalle" />
+          </Key>
+          <Property Name="IdOrdenServicioDetalle" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOrdenServicio" Type="Int64" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="EstadoMuestra" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdenServicio" Relationship="LaboratoryModel.FK_OrdenServicio_OrdenServicioDetalle" FromRole="OrdenServicioDetalle" ToRole="OrdenServicio" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMedico" Type="Int64" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="NroIdentificacionPaciente" Type="Int32" />
+          <Property Name="Nombres" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PrimerApellido" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="SegundoApellido" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="Int32" />
+          <Property Name="Hclinica" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+          <Property Name="Edad" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <NavigationProperty Name="Medicos" Relationship="Self.FK_Paciente_Medico" FromRole="Pacientes" ToRole="Medicos" />
+          <NavigationProperty Name="OrdenServicio" Relationship="Self.FK__OrdenServ__IdPac__32E0915F" FromRole="Pacientes" ToRole="OrdenServicio" />
+        </EntityType>
+        <EntityType Name="Pruebas">
+          <Key>
+            <PropertyRef Name="IdPrueba" />
+          </Key>
+          <Property Name="IdPrueba" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="NombrePrueba" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdValorReferencia" Type="Int64" />
+          <NavigationProperty Name="Examenes" Relationship="Self.FK_Pruebas_Examenes" FromRole="Pruebas" ToRole="Examenes" />
+          <NavigationProperty Name="ValoresReferencia" Relationship="Self.FK_Prueba_VlrRef" FromRole="Pruebas" ToRole="ValoresReferencia" />
+        </EntityType>
+        <EntityType Name="Resultados">
+          <Key>
+            <PropertyRef Name="IdResultado" />
+          </Key>
+          <Property Name="IdResultado" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRegistro" Type="Int64" />
+          <Property Name="IdLaboratorista" Type="Int64" />
+          <Property Name="IdExamen" Type="Int64" />
+          <NavigationProperty Name="Examenes" Relationship="Self.FK_Resultados_Examenes" FromRole="Resultados" ToRole="Examenes" />
+          <NavigationProperty Name="Laboratoristas" Relationship="Self.FK__Resultado__IdLab__3B75D760" FromRole="Resultados" ToRole="Laboratoristas" />
+          <NavigationProperty Name="OrdenServicio" Relationship="Self.FK__Resultado__IdReg__3A81B327" FromRole="Resultados" ToRole="OrdenServicio" />
+          <NavigationProperty Name="ResultadosDetalle" Relationship="LaboratoryModel.FK_ResultadosDetalle_Resultado" FromRole="Resultados" ToRole="ResultadosDetalle" />
+        </EntityType>
+        <EntityType Name="ResultadosDetalle">
+          <Key>
+            <PropertyRef Name="IdResultadoDetalle" />
+          </Key>
+          <Property Name="IdResultadoDetalle" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdResultado" Type="Int64" />
+          <Property Name="IdExamen" Type="Int64" />
+          <Property Name="IdPrueba" Type="Int64" />
+          <Property Name="IdValorReferencia" Type="Int64" />
+          <Property Name="ValorResultado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resultados" Relationship="LaboratoryModel.FK_ResultadosDetalle_Resultado" FromRole="ResultadosDetalle" ToRole="Resultados" />
+        </EntityType>
+        <EntityType Name="TipoMuestras">
+          <Key>
+            <PropertyRef Name="IdTipoMuestra" />
+          </Key>
+          <Property Name="IdTipoMuestra" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreTipoMuestra" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Muestras" Relationship="Self.FK_Muestras_TipoMuestras" FromRole="TipoMuestras" ToRole="Muestras" />
+        </EntityType>
+        <EntityType Name="ValoresReferencia">
+          <Key>
+            <PropertyRef Name="IdValorReferencia" />
+          </Key>
+          <Property Name="IdValorReferencia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LimiteInferiorEdad" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteSuperiorEdad" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteInferiorSexo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LimiteSuperiorSexo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="unidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TipoValor1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TipoValor2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pruebas" Relationship="Self.FK_Prueba_VlrRef" FromRole="ValoresReferencia" ToRole="Pruebas" />
+        </EntityType>
+        <Association Name="FK_Examenes_Area">
+          <End Role="Areas" Type="Self.Areas" Multiplicity="0..1" />
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Areas">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Examenes">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenServ__IdAse__33D4B598">
+          <End Role="Aseguradoras" Type="Self.Aseguradoras" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aseguradoras">
+              <PropertyRef Name="IdAseguradora" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdAseguradora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muestras_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Muestras" Type="Self.Muestras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Muestras">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pruebas_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Pruebas" Type="Self.Pruebas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Pruebas">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegPaciente_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resultados_Examenes">
+          <End Role="Examenes" Type="Self.Examenes" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examenes">
+              <PropertyRef Name="IdExamen" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_OrdenServicio">
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__IdLab__3B75D760">
+          <End Role="Laboratoristas" Type="Self.Laboratoristas" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratoristas">
+              <PropertyRef Name="IdLaboratorista" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdLaboratorista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paciente_Medico">
+          <End Role="Medicos" Type="Self.Medicos" Multiplicity="0..1" />
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicos">
+              <PropertyRef Name="IdMedico" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="IdMedico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muestras_TipoMuestras">
+          <End Role="TipoMuestras" Type="Self.TipoMuestras" Multiplicity="0..1" />
+          <End Role="Muestras" Type="Self.Muestras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMuestras">
+              <PropertyRef Name="IdTipoMuestra" />
+            </Principal>
+            <Dependent Role="Muestras">
+              <PropertyRef Name="IdTipoMuestra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenServ__IdPac__32E0915F">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="IdPaciente" />
+            </Principal>
+            <Dependent Role="OrdenServicio">
+              <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultado__IdReg__3A81B327">
+          <End Role="OrdenServicio" Type="Self.OrdenServicio" Multiplicity="0..1" />
+          <End Role="Resultados" Type="Self.Resultados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="Resultados">
+              <PropertyRef Name="IdRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prueba_VlrRef">
+          <End Role="ValoresReferencia" Type="Self.ValoresReferencia" Multiplicity="0..1" />
+          <End Role="Pruebas" Type="Self.Pruebas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValoresReferencia">
+              <PropertyRef Name="IdValorReferencia" />
+            </Principal>
+            <Dependent Role="Pruebas">
+              <PropertyRef Name="IdValorReferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LabConex" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Areas" />
+          <EntitySet Name="Aseguradoras" EntityType="Self.Aseguradoras" />
+          <EntitySet Name="Examenes" EntityType="Self.Examenes" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="Laboratoristas" EntityType="Self.Laboratoristas" />
+          <EntitySet Name="Medicos" EntityType="Self.Medicos" />
+          <EntitySet Name="Muestras" EntityType="Self.Muestras" />
+          <EntitySet Name="OrdenServicio" EntityType="Self.OrdenServicio" />
+          <EntitySet Name="OrdenServicioDetalle" EntityType="Self.OrdenServicioDetalle" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
+          <EntitySet Name="Pruebas" EntityType="Self.Pruebas" />
+          <EntitySet Name="Resultados" EntityType="Self.Resultados" />
+          <EntitySet Name="ResultadosDetalle" EntityType="Self.ResultadosDetalle" />
+          <EntitySet Name="TipoMuestras" EntityType="Self.TipoMuestras" />
+          <EntitySet Name="ValoresReferencia" EntityType="Self.ValoresReferencia" />
+          <AssociationSet Name="FK_Examenes_Area" Association="Self.FK_Examenes_Area">
+            <End Role="Areas" EntitySet="Areas" />
+            <End Role="Examenes" EntitySet="Examenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenServ__IdAse__33D4B598" Association="Self.FK__OrdenServ__IdAse__33D4B598">
+            <End Role="Aseguradoras" EntitySet="Aseguradoras" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muestras_Examenes" Association="Self.FK_Muestras_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Muestras" EntitySet="Muestras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pruebas_Examenes" Association="Self.FK_Pruebas_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Pruebas" EntitySet="Pruebas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegPaciente_Examenes" Association="Self.FK_RegPaciente_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resultados_Examenes" Association="Self.FK_Resultados_Examenes">
+            <End Role="Examenes" EntitySet="Examenes" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_OrdenServicio" Association="Self.FK_Facturas_OrdenServicio">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__IdLab__3B75D760" Association="Self.FK__Resultado__IdLab__3B75D760">
+            <End Role="Laboratoristas" EntitySet="Laboratoristas" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_Medico" Association="Self.FK_Paciente_Medico">
+            <End Role="Medicos" EntitySet="Medicos" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muestras_TipoMuestras" Association="Self.FK_Muestras_TipoMuestras">
+            <End Role="TipoMuestras" EntitySet="TipoMuestras" />
+            <End Role="Muestras" EntitySet="Muestras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenServ__IdPac__32E0915F" Association="Self.FK__OrdenServ__IdPac__32E0915F">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultado__IdReg__3A81B327" Association="Self.FK__Resultado__IdReg__3A81B327">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="Resultados" EntitySet="Resultados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prueba_VlrRef" Association="Self.FK_Prueba_VlrRef">
+            <End Role="ValoresReferencia" EntitySet="ValoresReferencia" />
+            <End Role="Pruebas" EntitySet="Pruebas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenServicio_OrdenServicioDetalle" Association="LaboratoryModel.FK_OrdenServicio_OrdenServicioDetalle">
+            <End Role="OrdenServicio" EntitySet="OrdenServicio" />
+            <End Role="OrdenServicioDetalle" EntitySet="OrdenServicioDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultadosDetalle_Resultado" Association="LaboratoryModel.FK_ResultadosDetalle_Resultado">
+            <End Role="Resultados" EntitySet="Resultados" />
+            <End Role="ResultadosDetalle" EntitySet="ResultadosDetalle" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_OrdenServicio_OrdenServicioDetalle">
+          <End Type="LaboratoryModel.OrdenServicio" Role="OrdenServicio" Multiplicity="0..1" />
+          <End Type="LaboratoryModel.OrdenServicioDetalle" Role="OrdenServicioDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenServicio">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Principal>
+            <Dependent Role="OrdenServicioDetalle">
+              <PropertyRef Name="IdOrdenServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadosDetalle_Resultado">
+          <End Type="LaboratoryModel.Resultados" Role="Resultados" Multiplicity="0..1" />
+          <End Type="LaboratoryModel.ResultadosDetalle" Role="ResultadosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resultados">
+              <PropertyRef Name="IdResultado" />
+            </Principal>
+            <Dependent Role="ResultadosDetalle">
+              <PropertyRef Name="IdResultado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LaboratoryModelStoreContainer" CdmEntityContainer="LabConex">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="LaboratoryModel.Areas">
+              <MappingFragment StoreEntitySet="Areas">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="CodigoArea" ColumnName="CodigoArea" />
+                <ScalarProperty Name="NombreAreas" ColumnName="NombreAreas" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="SubCategoria" ColumnName="SubCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aseguradoras">
+            <EntityTypeMapping TypeName="LaboratoryModel.Aseguradoras">
+              <MappingFragment StoreEntitySet="Aseguradoras">
+                <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+                <ScalarProperty Name="CodigoAseguradora" ColumnName="CodigoAseguradora" />
+                <ScalarProperty Name="NombreAseguradora" ColumnName="NombreAseguradora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examenes">
+            <EntityTypeMapping TypeName="LaboratoryModel.Examenes">
+              <MappingFragment StoreEntitySet="Examenes">
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="CodigoExamen" ColumnName="CodigoExamen" />
+                <ScalarProperty Name="NombreExamen" ColumnName="NombreExamen" />
+                <ScalarProperty Name="NivelAtencion" ColumnName="NivelAtencion" />
+                <ScalarProperty Name="SignificanciaClinica" ColumnName="SignificanciaClinica" />
+                <ScalarProperty Name="PrecioExamen" ColumnName="PrecioExamen" />
+                <ScalarProperty Name="CodigoCUPS" ColumnName="CodigoCUPS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="LaboratoryModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="NroFactura" ColumnName="NroFactura" />
+                <ScalarProperty Name="Pago" ColumnName="Pago" />
+                <ScalarProperty Name="IdOrdenServicio" ColumnName="IdOrdenServicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laboratoristas">
+            <EntityTypeMapping TypeName="LaboratoryModel.Laboratoristas">
+              <MappingFragment StoreEntitySet="Laboratoristas">
+                <ScalarProperty Name="IdLaboratorista" ColumnName="IdLaboratorista" />
+                <ScalarProperty Name="NombreLaboratorista" ColumnName="NombreLaboratorista" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="NroRegistro" ColumnName="NroRegistro" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicos">
+            <EntityTypeMapping TypeName="LaboratoryModel.Medicos">
+              <MappingFragment StoreEntitySet="Medicos">
+                <ScalarProperty Name="IdMedico" ColumnName="IdMedico" />
+                <ScalarProperty Name="CodMedico" ColumnName="CodMedico" />
+                <ScalarProperty Name="NombreMedico" ColumnName="NombreMedico" />
+                <ScalarProperty Name="ApellidoMedico" ColumnName="ApellidoMedico" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Muestras">
+            <EntityTypeMapping TypeName="LaboratoryModel.Muestras">
+              <MappingFragment StoreEntitySet="Muestras">
+                <ScalarProperty Name="IdMuestra" ColumnName="IdMuestra" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="IdTipoMuestra" ColumnName="IdTipoMuestra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenServicio">
+            <EntityTypeMapping TypeName="LaboratoryModel.OrdenServicio">
+              <MappingFragment StoreEntitySet="OrdenServicio">
+                <ScalarProperty Name="IdOrdenServicio" ColumnName="IdOrdenServicio" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="NroRegistro" ColumnName="NroRegistro" />
+                <ScalarProperty Name="IngresoPor" ColumnName="IngresoPor" />
+                <ScalarProperty Name="IdMedico" ColumnName="IdMedico" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenServicioDetalle">
+            <EntityTypeMapping TypeName="LaboratoryModel.OrdenServicioDetalle">
+              <MappingFragment StoreEntitySet="OrdenServicioDetalle">
+                <ScalarProperty Name="IdOrdenServicioDetalle" ColumnName="IdOrdenServicioDetalle" />
+                <ScalarProperty Name="IdOrdenServicio" ColumnName="IdOrdenServicio" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="EstadoMuestra" ColumnName="EstadoMuestra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="LaboratoryModel.Pacientes">
+              <MappingFragment StoreEntitySet="Pacientes">
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="IdMedico" ColumnName="IdMedico" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="NroIdentificacionPaciente" ColumnName="NroIdentificacionPaciente" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
+                <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Hclinica" ColumnName="Hclinica" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pruebas">
+            <EntityTypeMapping TypeName="LaboratoryModel.Pruebas">
+              <MappingFragment StoreEntitySet="Pruebas">
+                <ScalarProperty Name="IdPrueba" ColumnName="IdPrueba" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="NombrePrueba" ColumnName="NombrePrueba" />
+                <ScalarProperty Name="IdValorReferencia" ColumnName="IdValorReferencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resultados">
+            <EntityTypeMapping TypeName="LaboratoryModel.Resultados">
+              <MappingFragment StoreEntitySet="Resultados">
+                <ScalarProperty Name="IdResultado" ColumnName="IdResultado" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+                <ScalarProperty Name="IdLaboratorista" ColumnName="IdLaboratorista" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultadosDetalle">
+            <EntityTypeMapping TypeName="LaboratoryModel.ResultadosDetalle">
+              <MappingFragment StoreEntitySet="ResultadosDetalle">
+                <ScalarProperty Name="IdResultadoDetalle" ColumnName="IdResultadoDetalle" />
+                <ScalarProperty Name="IdResultado" ColumnName="IdResultado" />
+                <ScalarProperty Name="IdExamen" ColumnName="IdExamen" />
+                <ScalarProperty Name="IdPrueba" ColumnName="IdPrueba" />
+                <ScalarProperty Name="IdValorReferencia" ColumnName="IdValorReferencia" />
+                <ScalarProperty Name="ValorResultado" ColumnName="ValorResultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMuestras">
+            <EntityTypeMapping TypeName="LaboratoryModel.TipoMuestras">
+              <MappingFragment StoreEntitySet="TipoMuestras">
+                <ScalarProperty Name="IdTipoMuestra" ColumnName="IdTipoMuestra" />
+                <ScalarProperty Name="NombreTipoMuestra" ColumnName="NombreTipoMuestra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValoresReferencia">
+            <EntityTypeMapping TypeName="LaboratoryModel.ValoresReferencia">
+              <MappingFragment StoreEntitySet="ValoresReferencia">
+                <ScalarProperty Name="IdValorReferencia" ColumnName="IdValorReferencia" />
+                <ScalarProperty Name="LimiteInferiorEdad" ColumnName="LimiteInferiorEdad" />
+                <ScalarProperty Name="LimiteSuperiorEdad" ColumnName="LimiteSuperiorEdad" />
+                <ScalarProperty Name="LimiteInferiorSexo" ColumnName="LimiteInferiorSexo" />
+                <ScalarProperty Name="LimiteSuperiorSexo" ColumnName="LimiteSuperiorSexo" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="TipoValor1" ColumnName="TipoValor1" />
+                <ScalarProperty Name="TipoValor2" ColumnName="TipoValor2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="872dad8bf08443d8a30cbce4b1469ddb" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="LaboratoryModel.Areas" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Aseguradoras" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Examenes" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Facturas" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Laboratoristas" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="LaboratoryModel.Medicos" Width="1.5" PointX="3.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Muestras" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.OrdenServicio" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.OrdenServicioDetalle" Width="2.375" PointX="8.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Pacientes" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Pruebas" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.Resultados" Width="1.5" PointX="10.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.ResultadosDetalle" Width="2.5" PointX="14" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.TipoMuestras" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaboratoryModel.ValoresReferencia" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="LaboratoryModel.FK_Examenes_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK__OrdenServ__IdAse__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Muestras_Examenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Pruebas_Examenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_RegPaciente_Examenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Resultados_Examenes" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Facturas_OrdenServicio" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK__Resultado__IdLab__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Paciente_Medico" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Muestras_TipoMuestras" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK__OrdenServ__IdPac__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK__Resultado__IdReg__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_Prueba_VlrRef" ManuallyRouted="false" />
+        <AssociationConnector Association="LaboratoryModel.FK_OrdenServicio_OrdenServicioDetalle" />
+        <AssociationConnector Association="LaboratoryModel.FK_ResultadosDetalle_Resultado" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

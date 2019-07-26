@@ -1,1 +1,4 @@
 List<datarow> lst = dt.AsEnumerable().ToList<datarow>();
+using System.Linq;
+...
+List<DataRow> list = dt.AsEnumerable().ToList();
